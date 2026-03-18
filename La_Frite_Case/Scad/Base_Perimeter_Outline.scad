@@ -1,6 +1,6 @@
 // Previous variables from Base_Shape_Volume
 //$fn = $preview ? 5 : 100;
-//tolerance = 0.1;
+//tolerance = 0.4;
 //aWidth = 56+tolerance;
 //aDepth = 65.5+tolerance;
 //aHeight = 15;

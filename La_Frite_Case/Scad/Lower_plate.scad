@@ -1,6 +1,6 @@
 // Previous variables from Base_Shape_Volume
 //$fn = $preview ? 5 : 100;
-//tolerance = 0.1;
+//tolerance = 0.4;
 //aWidth = 56+tolerance;
 //aDepth = 65.5+tolerance;
 //aHeight = 15;
@@ -19,14 +19,15 @@ cornerStudOffsetY=3.5;
 cornerStudRadius=1.45; // Diameter of stud is around 3mm, but allowed a tolerance of 0.1
 boardOffsetZ=1; // About 1mm of space the board takes up
 airFlowMaxHeight = rimHeight-boardOffsetZ*2-beamHeight;
-boardAirFlowWidth=7.9;
+boardAirFlowWidth=7.65;
 boardAirFlowSpacer=1.5;
-plasticHookWidth=boardAirFlowWidth*2;
 floorHeight=1;
 rimCut=1;
 
 // Import variables from Base_Shape_Volume.scad
 include <Base_Perimeter_Outline.scad>
+// Include function from hook
+use <Hook.scad>
 
 // Draw loose plate
 module bottomPlate() {
@@ -112,28 +113,28 @@ module plateHoled() {
         // Calculate for loop conditions
         holeStart=cornerSize;
         holeIncrement=boardAirFlowWidth+boardAirFlowSpacer;
-        holeEnd=(aDepth)-cornerSize-boardAirFlowWidth;
+        holeEnd=(aDepth)-cornerSize;
         
         // Use a loop to etch in holes on both sides of board to provide airflow
-        for (i=[holeStart+plasticHookWidth+boardAirFlowSpacer:holeIncrement:holeEnd]) translate([(aWidth/2),-(aDepth/2)+i,beamHeight+boardOffsetZ]) polyhedron(airFlowPoints,airFlowFaces);
-        for (i=[holeStart:holeIncrement:holeEnd-plasticHookWidth-boardAirFlowSpacer]) translate([-(aWidth/2)-perimeterThickness,-(aDepth/2)+i,beamHeight+boardOffsetZ]) polyhedron(airFlowPoints,airFlowFaces);
+        for (i=[holeStart:holeIncrement:holeEnd]) translate([(aWidth/2),-(aDepth/2)+i,beamHeight+boardOffsetZ]) polyhedron(airFlowPoints,airFlowFaces);
+        for (i=[holeStart:holeIncrement:holeEnd]) translate([-(aWidth/2)-perimeterThickness,-(aDepth/2)+i,beamHeight+boardOffsetZ]) polyhedron(airFlowPoints,airFlowFaces);
     
         // IO Cuts (Magic numbers beware!)
             // USB-C port
-        translate([-(aWidth/2)+cornerSize+0.35-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight+boardOffsetZ-(tolerance/2)]) resize([8+tolerance,perimeterThickness,6]) cube();
+        translate([-(aWidth/2)+cornerSize+0.3-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight+boardOffsetZ-(tolerance/2)]) resize([8+tolerance,perimeterThickness,6]) cube();
             // Ethernet port
-        translate([-(aWidth/2)+cornerSize+9.175-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight-3-(tolerance/2)]) resize([16.5+tolerance,perimeterThickness,10]) cube();
+        translate([-(aWidth/2)+cornerSize+9.125-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight-3-(tolerance/2)]) resize([16.5+tolerance,perimeterThickness,10]) cube();
             // HDMI port
-        translate([-(aWidth/2)+cornerSize+27.5-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight+boardOffsetZ+1-(tolerance/2)]) resize([15.3+tolerance,perimeterThickness,10]) cube();
+        translate([-(aWidth/2)+cornerSize+27.425-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight+boardOffsetZ+1-(tolerance/2)]) resize([15.3+tolerance,perimeterThickness,10]) cube();
             // IR sensor hole
-        translate([(aWidth/2)-cornerSize-3-(tolerance/2)-1.8,(aDepth/2)+perimeterThickness,beamHeight+boardOffsetZ+2.25-(tolerance/2)]) rotate([90,0,0]) cylinder(h=perimeterThickness,r=1.8); 
+        translate([(aWidth/2)-cornerSize-3-(tolerance/2)-1.7,(aDepth/2)+perimeterThickness,beamHeight+boardOffsetZ+2.25-(tolerance/2)]) rotate([90,0,0]) cylinder(h=perimeterThickness,r=1.8); 
             // Generic USB ports
-        translate([(aWidth/2)-cornerSize-9.9-(tolerance/2)-13.6,(aDepth/2),beamHeight+boardOffsetZ-(tolerance/2)+1.25]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
-        translate([(aWidth/2)-cornerSize-28-(tolerance/2)-13.6,(aDepth/2),beamHeight+boardOffsetZ-(tolerance/2)+1.25]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
+        translate([(aWidth/2)-cornerSize-9.825-(tolerance/2)-13.6,(aDepth/2),beamHeight+boardOffsetZ-(tolerance/2)+1.25]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
+        translate([(aWidth/2)-cornerSize-27.925-(tolerance/2)-13.6,(aDepth/2),beamHeight+boardOffsetZ-(tolerance/2)+1.25]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
         
         // Cutout inserts
-        translate([-(aWidth/2)-(perimeterThickness*3/8)-(tolerance/2),-(aDepth/2)+cornerSize,rimHeight-(boardOffsetZ/2)-tolerance]) cube([(perimeterThickness/4)+tolerance,(aDepth)-cornerSize*2-(plasticHookWidth+boardAirFlowSpacer),(boardOffsetZ/2)+tolerance]);
-        translate([(aWidth/2)+(perimeterThickness/8)+(tolerance/2),-(aDepth/2)+cornerSize+(plasticHookWidth+boardAirFlowSpacer),rimHeight-(boardOffsetZ/2)-tolerance]) cube([(perimeterThickness/4)+tolerance,(aDepth)-cornerSize*2-(plasticHookWidth+boardAirFlowSpacer),(boardOffsetZ/2)+tolerance]);
+        translate([-(aWidth/2)-(perimeterThickness*3/8)-(tolerance/2),-(aDepth/2)+cornerSize,rimHeight-(boardOffsetZ/2)-tolerance]) cube([(perimeterThickness/4)+tolerance,(aDepth)-cornerSize*2,(boardOffsetZ/2)+tolerance]);
+        translate([(aWidth/2)+(perimeterThickness/8)-(tolerance/2),-(aDepth/2)+cornerSize,rimHeight-(boardOffsetZ/2)-tolerance]) cube([(perimeterThickness/4)+tolerance,(aDepth)-cornerSize*2,(boardOffsetZ/2)+tolerance]);
         
         // Cutout rim
         resize([aWidth+8.1,aDepth+8.1,(rimCut*10/10)], auto=[false,false,false]) perimeter();
@@ -146,7 +147,14 @@ module plateHoled() {
         resize([aWidth+6.7,aDepth+6.7,(rimCut*3/10)], auto=[false,false,false]) perimeter();
         resize([aWidth+6.5,aDepth+6.5,(rimCut*2/10)], auto=[false,false,false]) perimeter();
         resize([aWidth+6.3,aDepth+6.3,(rimCut*1/10)], auto=[false,false,false]) perimeter();
-    }
-    
+        
+        // Cutout spot for hook
+            // bottom right
+        translate([(aWidth/2)+(perimeterThickness/2),-(aDepth/2)+0.5-(tolerance/2),0]) rotate([0,0,90]) drawPaddedHook();
+        translate([(aWidth/2)+(perimeterThickness/2),-(aDepth/2)+0.5+(tolerance/2),0]) rotate([0,0,90]) drawPaddedHook();
+            // upper left
+        translate([-(aWidth/2)-(perimeterThickness/2),(aDepth/2)-0.5-(tolerance/2),0]) rotate([0,0,-90]) drawPaddedHook();
+        translate([-(aWidth/2)-(perimeterThickness/2),(aDepth/2)-0.5+(tolerance/2),0]) rotate([0,0,-90]) drawPaddedHook();
+    }  
 }
 plateHoled();
