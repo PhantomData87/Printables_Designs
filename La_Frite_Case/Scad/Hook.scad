@@ -36,11 +36,11 @@ module drawRim() {
 
 module drawClaw() {
     union() {
-        translate([0,1,0]) cube([hookWidth,5,hookThickness]);
-        translate([0,1,1]) drawRim();
+        translate([0,1,0]) cube([hookWidth,5,hookThickness+2]);
+        translate([0,1,3]) drawRim();
         difference() {
-            translate([0,1+4,0.25]) rotate(a=[0,90,0]) cylinder(hookWidth,r=1.5);
-            translate([0,3.5,-2]) cube([hookWidth,3,2]);
+            translate([0,1+3.9,2.5]) rotate(a=[0,90,0]) cylinder(hookWidth,r=1.25);
+            translate([0,6,1.1]) cube([hookWidth,3,2]);
         }
     }
 }
@@ -48,15 +48,15 @@ module drawClaw() {
 module drawSmallerClaw() {
     difference() {
         union() {
-            translate([0,0.7,0.5]) cube([hookWidth,5.3,hookThickness/2]);
+            translate([0,0.7,0]) cube([hookWidth,5,hookThickness+2]);
             difference() {
-                translate([0,1.3+4,0.25]) rotate(a=[0,90,0]) cylinder(hookWidth,r=1.5);
-                translate([0,3.8,-2]) cube([hookWidth,3,2]);
+                translate([0,1+4.2,2.5]) rotate(a=[0,90,0]) cylinder(hookWidth,r=1.25);
+                translate([0,6.1-tolerance,-3.1]) cube([hookWidth,3,20]);
             }
-            translate([0,0.7,1]) resize([0,0,0.5], false) drawRim();
+            translate([0,0.7,3]) resize([0,0,0.5], false) drawRim();
         }
         translate([0,6.5-tolerance,-2]) cube([hookWidth,1,4]);
-        translate([0,0,0]) cube([hookWidth,20,0.5]);
+        translate([0,0,0]) cube([hookWidth,20,1]);
     }
 }
 
@@ -77,12 +77,11 @@ module drawHook() {
             translate([hookWidth,0.2,hookHeight]) rotate(a=[180,0,180]) drawSmallerClaw();
             translate([0,1,0]) cube([hookWidth,(tolerance/2),hookHeight]);
         }
-        translate([0,0,0.5]) resize([0,0,0.5], false) drawRim();
-        translate([hookWidth,0,hookHeight-0.5]) resize([0,0,0.5], false) rotate(a=[180,0,180]) drawRim();
-        cube([hookWidth,2,0.5]);
-        translate([0,0,hookHeight-0.5]) cube([hookWidth,2,0.5]);
+        translate([0,0,1]) drawRim();
+        translate([hookWidth,0,hookHeight-1]) rotate(a=[180,0,180]) drawRim();
+        cube([hookWidth,2,1]);
+        translate([0,0,hookHeight-1]) cube([hookWidth,2,1]);
     }
 }
 
 translate([0,0,0]) rotate([0,90,0]) drawHook();
-//translate([0,0,-hookWidth]) rotate([0,90,0]) drawPaddedHook();

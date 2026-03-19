@@ -14,12 +14,12 @@ beamHeight = 5;
 rimHeight = beamHeight+6;
 beamXOffset = 1; // Always add one to offset wall depth
 cornerSize=6;
-cornerStudOffsetX=3.25;
-cornerStudOffsetY=3.5;
-cornerStudRadius=1.45; // Diameter of stud is around 3mm, but allowed a tolerance of 0.1
+cornerStudOffsetX=3.8;
+cornerStudOffsetY=4.5;
+cornerStudRadius=1; // Diameter of stud is around 3mm, but allowed a tolerance of 0.5mm
 boardOffsetZ=1; // About 1mm of space the board takes up
 airFlowMaxHeight = rimHeight-boardOffsetZ*2-beamHeight;
-boardAirFlowWidth=7.65;
+boardAirFlowWidth=5.6;
 boardAirFlowSpacer=1.5;
 floorHeight=1;
 rimCut=1;
@@ -72,16 +72,16 @@ module bottomPlate() {
         }
         
         // Corner Stud bottom left
-        translate([-(aWidth/2)+cornerStudOffsetX,-(aDepth/2)+cornerStudOffsetY,beamHeight]) cylinder(h=rimHeight-beamHeight, r=cornerStudRadius);
+        translate([-(aWidth/2)+cornerStudOffsetX,-(aDepth/2)+cornerStudOffsetY,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
         
         // Corner Stud upper left
-        translate([-(aWidth/2)+cornerStudOffsetX,(aDepth/2)-cornerStudOffsetY,beamHeight]) cylinder(h=rimHeight-beamHeight, r=cornerStudRadius);
+        translate([-(aWidth/2)+cornerStudOffsetX,(aDepth/2)-cornerStudOffsetY,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
         
         // Corner Stud bottom right
-        translate([(aWidth/2)-cornerStudOffsetX,-(aDepth/2)+cornerStudOffsetY,beamHeight]) cylinder(h=rimHeight-beamHeight, r=cornerStudRadius);
+        translate([(aWidth/2)-cornerStudOffsetX,-(aDepth/2)+cornerStudOffsetY,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
         
         // Corner Stud upper right
-        translate([(aWidth/2)-cornerStudOffsetX,(aDepth/2)-cornerStudOffsetY,beamHeight]) cylinder(h=rimHeight-beamHeight, r=cornerStudRadius);
+        translate([(aWidth/2)-cornerStudOffsetX,(aDepth/2)-cornerStudOffsetY,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
         
         // Floor
         translate([0,0,(floorHeight/2)]) resize([0,0,floorHeight], [false,false,false]) innerShape();
@@ -121,20 +121,20 @@ module plateHoled() {
     
         // IO Cuts (Magic numbers beware!)
             // USB-C port
-        translate([-(aWidth/2)+cornerSize+0.3-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight+boardOffsetZ-(tolerance/2)]) resize([8+tolerance,perimeterThickness,6]) cube();
+        translate([-(aWidth/2)+cornerSize+0.8-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight+boardOffsetZ-(tolerance/2)]) resize([8+tolerance,perimeterThickness,6]) cube();
             // Ethernet port
-        translate([-(aWidth/2)+cornerSize+9.125-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight-3-(tolerance/2)]) resize([16.5+tolerance,perimeterThickness,10]) cube();
+        translate([-(aWidth/2)+cornerSize+9.625-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight-3-(tolerance/2)]) resize([16.5+tolerance,perimeterThickness,10]) cube();
             // HDMI port
-        translate([-(aWidth/2)+cornerSize+27.425-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight+boardOffsetZ+1-(tolerance/2)]) resize([15.3+tolerance,perimeterThickness,10]) cube();
+        translate([-(aWidth/2)+cornerSize+27.925-(tolerance/2),-(aDepth/2)-perimeterThickness,beamHeight+boardOffsetZ+1-(tolerance/2)]) resize([15.3+tolerance,perimeterThickness,10]) cube();
             // IR sensor hole
-        translate([(aWidth/2)-cornerSize-3-(tolerance/2)-1.7,(aDepth/2)+perimeterThickness,beamHeight+boardOffsetZ+2.25-(tolerance/2)]) rotate([90,0,0]) cylinder(h=perimeterThickness,r=1.8); 
+        translate([(aWidth/2)-cornerSize-3.5-(tolerance/2)-1.7,(aDepth/2)+perimeterThickness,beamHeight+boardOffsetZ+2.25-(tolerance/2)]) rotate([90,0,0]) cylinder(h=perimeterThickness,r=1.8); 
             // Generic USB ports
-        translate([(aWidth/2)-cornerSize-9.825-(tolerance/2)-13.6,(aDepth/2),beamHeight+boardOffsetZ-(tolerance/2)+1.25]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
-        translate([(aWidth/2)-cornerSize-27.925-(tolerance/2)-13.6,(aDepth/2),beamHeight+boardOffsetZ-(tolerance/2)+1.25]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
+        translate([(aWidth/2)-cornerSize-10.325-(tolerance/2)-13.6,(aDepth/2),beamHeight+boardOffsetZ-(tolerance/2)+1.25]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
+        translate([(aWidth/2)-cornerSize-28.425-(tolerance/2)-13.6,(aDepth/2),beamHeight+boardOffsetZ-(tolerance/2)+1.25]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
         
         // Cutout inserts
-        translate([-(aWidth/2)-(perimeterThickness*3/8)-(tolerance/2),-(aDepth/2)+cornerSize,rimHeight-(boardOffsetZ/2)-tolerance]) cube([(perimeterThickness/4)+tolerance,(aDepth)-cornerSize*2,(boardOffsetZ/2)+tolerance]);
-        translate([(aWidth/2)+(perimeterThickness/8)-(tolerance/2),-(aDepth/2)+cornerSize,rimHeight-(boardOffsetZ/2)-tolerance]) cube([(perimeterThickness/4)+tolerance,(aDepth)-cornerSize*2,(boardOffsetZ/2)+tolerance]);
+        translate([-(aWidth/2)-(perimeterThickness*3/8)-(tolerance/2),-(aDepth/2)+cornerSize,rimHeight-(boardOffsetZ/2)-(tolerance/2)]) cube([(perimeterThickness/4)+tolerance,(aDepth)-cornerSize*2,(boardOffsetZ/2)+(tolerance/2)]);
+        translate([(aWidth/2)+(perimeterThickness/8)-(tolerance/2),-(aDepth/2)+cornerSize,rimHeight-(boardOffsetZ/2)-(tolerance/2)]) cube([(perimeterThickness/4)+tolerance,(aDepth)-cornerSize*2,(boardOffsetZ/2)+(tolerance/2)]);
         
         // Cutout rim
         resize([aWidth+8.1,aDepth+8.1,(rimCut*10/10)], auto=[false,false,false]) perimeter();

@@ -16,7 +16,7 @@ rimHeight = 7;
 cornerSize=6;
 boardOffsetZ=1; // About 1mm of space the board takes up
 airFlowMaxHeight = rimHeight-boardOffsetZ*2-1;
-boardAirFlowWidth=7.65;
+boardAirFlowWidth=5.6;
 boardAirFlowSpacer=1.5;
 floorHeight=1;
 rimCut=1;
@@ -45,7 +45,7 @@ module upperPlate() {
         
          // IO Extensions (Magic numbers beware!)
             // USB-C port
-        translate([-(aWidth/2)+41.7,-(aDepth/2)-(perimeterThickness/2),rimHeight]) resize([8,perimeterThickness/2,2.5-tolerance]) cube();
+        translate([-(aWidth/2)+42.2,-(aDepth/2)-(perimeterThickness/2),rimHeight]) resize([8,perimeterThickness/2,2.5-tolerance]) cube();
         
     // Corner filling bottom left
     union() {
@@ -99,12 +99,12 @@ module plateHoledUp() {
     
         // IO Cuts (Magic numbers beware!)
             // Ethernet port
-        translate([-(aWidth/2)+24.375-(tolerance/2),-(aDepth/2)-perimeterThickness,rimHeight-2-(tolerance/2)]) resize([16.5+tolerance,perimeterThickness,10]) cube();
+        translate([-(aWidth/2)+24.875-(tolerance/2),-(aDepth/2)-perimeterThickness,rimHeight-2-(tolerance/2)]) resize([16.5+tolerance,perimeterThickness,10]) cube();
             // Generic USB ports
-        translate([-(aWidth/2)+9.825-(tolerance/2)+6,(aDepth/2),rimHeight-1.75-(tolerance/2)]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
-        translate([-(aWidth/2)+27.925-(tolerance/2)+6,(aDepth/2),rimHeight-1.75-(tolerance/2)]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
+        translate([-(aWidth/2)+10.325-(tolerance/2)+6,(aDepth/2),rimHeight-1.75-(tolerance/2)]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
+        translate([-(aWidth/2)+28.425-(tolerance/2)+6,(aDepth/2),rimHeight-1.75-(tolerance/2)]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
             // HDMI port
-        translate([-(aWidth/2)+7.275-(tolerance/2),-(aDepth/2)-perimeterThickness,rimHeight-1.5-(tolerance/2)]) resize([15.3+tolerance,perimeterThickness,2]) cube();
+        translate([-(aWidth/2)+7.775-(tolerance/2),-(aDepth/2)-perimeterThickness,rimHeight-1.5-(tolerance/2)]) resize([15.3+tolerance,perimeterThickness,2]) cube();
         
         // Cutout rim
         resize([aWidth+8.1,aDepth+8.1,(rimCut*10/10)], auto=[false,false,false]) perimeter();
@@ -121,13 +121,13 @@ module plateHoledUp() {
         // Cutout floor faces
             // GPIO cuts
                 // 40 pin headers
-        translate([-(aWidth/2)+0.25,-(aDepth/2)+cornerSize,0]) cube([5.9,aDepth-cornerSize*2,floorHeight]);
+        translate([-(aWidth/2)+0.75,-(aDepth/2)+cornerSize+1,0]) cube([5.9,aDepth-cornerSize*2,floorHeight]);
                 // 4 pin headers
-        translate([-(aWidth/2)+5.9+0.75,-(aDepth/2)+cornerSize+6.5,0]) cube([2.9,12,floorHeight]);
+        translate([-(aWidth/2)+6.4+0.75,-(aDepth/2)+cornerSize+7.5,0]) cube([2.9,12,floorHeight]);
                 // 3 pin headers
-        translate([-(aWidth/2)+5.9+2.9+0.75+11,-(aDepth/2)+cornerSize+5.35,0]) cube([2.9,9,floorHeight]);
+        translate([-(aWidth/2)+6.4+2.9+0.75+11,-(aDepth/2)+cornerSize+6.35,0]) cube([2.9,9,floorHeight]);
                 // 4 pin headers left side
-        translate([(aWidth/2)-10.35,-(aDepth/2)+cornerSize+3.65,0]) cube([2.9,12,floorHeight]);
+        translate([(aWidth/2)-10.85,-(aDepth/2)+cornerSize+4.65,0]) cube([2.9,12,floorHeight]);
 
         // Cutout spot for hook
             // bottom left

@@ -3,8 +3,8 @@ $fn = $preview ? 5 : 100;
 
 // Approximation of measurement
 tolerance = 0.4;
-aWidth = 56;
-aDepth = 65.5;
+aWidth = 57;
+aDepth = 67.5;
 aHeight = 15;
 edgeRadius = 2;
 
