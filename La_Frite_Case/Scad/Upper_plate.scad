@@ -18,6 +18,7 @@ boardOffsetZ=1; // About 1mm of space the board takes up
 airFlowMaxHeight = rimHeight-boardOffsetZ*2-1;
 boardAirFlowWidth=5.6;
 boardAirFlowSpacer=1.5;
+cutoutOffsetYExtra=0.5;
 floorHeight=1;
 rimCut=1;
 
@@ -121,13 +122,13 @@ module plateHoledUp() {
         // Cutout floor faces
             // GPIO cuts
                 // 40 pin headers
-        translate([-(aWidth/2)+0.75,-(aDepth/2)+cornerSize+1,0]) cube([5.9,aDepth-cornerSize*2,floorHeight]);
+        translate([-(aWidth/2)+0.75,-(aDepth/2)+cornerSize+1-cutoutOffsetYExtra,0]) cube([5.9,aDepth-cornerSize*2,floorHeight]);
                 // 4 pin headers
-        translate([-(aWidth/2)+6.4+0.75,-(aDepth/2)+cornerSize+7.5,0]) cube([2.9,12,floorHeight]);
+        translate([-(aWidth/2)+6.4+0.75,-(aDepth/2)+cornerSize+7.5-cutoutOffsetYExtra,0]) cube([2.9,12,floorHeight]);
                 // 3 pin headers
-        translate([-(aWidth/2)+6.4+2.9+0.75+11,-(aDepth/2)+cornerSize+6.35,0]) cube([2.9,9,floorHeight]);
+        translate([-(aWidth/2)+6.4+2.9+0.75+11,-(aDepth/2)+cornerSize+6.35-cutoutOffsetYExtra,0]) cube([2.9,9,floorHeight]);
                 // 4 pin headers left side
-        translate([(aWidth/2)-10.85,-(aDepth/2)+cornerSize+4.65,0]) cube([2.9,12,floorHeight]);
+        translate([(aWidth/2)-10.85,-(aDepth/2)+cornerSize+4.65-cutoutOffsetYExtra,0]) cube([2.9,12,floorHeight]);
 
         // Cutout spot for hook
             // bottom left

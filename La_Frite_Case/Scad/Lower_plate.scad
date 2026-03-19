@@ -16,6 +16,7 @@ beamXOffset = 1; // Always add one to offset wall depth
 cornerSize=6;
 cornerStudOffsetX=3.8;
 cornerStudOffsetY=4.5;
+cornerStudOffsetYExtra=0.5;
 cornerStudRadius=1; // Diameter of stud is around 3mm, but allowed a tolerance of 0.5mm
 boardOffsetZ=1; // About 1mm of space the board takes up
 airFlowMaxHeight = rimHeight-boardOffsetZ*2-beamHeight;
@@ -72,16 +73,16 @@ module bottomPlate() {
         }
         
         // Corner Stud bottom left
-        translate([-(aWidth/2)+cornerStudOffsetX,-(aDepth/2)+cornerStudOffsetY,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
+        translate([-(aWidth/2)+cornerStudOffsetX,-(aDepth/2)+cornerStudOffsetY-cornerStudOffsetYExtra,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
         
         // Corner Stud upper left
-        translate([-(aWidth/2)+cornerStudOffsetX,(aDepth/2)-cornerStudOffsetY,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
+        translate([-(aWidth/2)+cornerStudOffsetX,(aDepth/2)-cornerStudOffsetY-cornerStudOffsetYExtra,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
         
         // Corner Stud bottom right
-        translate([(aWidth/2)-cornerStudOffsetX,-(aDepth/2)+cornerStudOffsetY,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
+        translate([(aWidth/2)-cornerStudOffsetX,-(aDepth/2)+cornerStudOffsetY-cornerStudOffsetYExtra,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
         
         // Corner Stud upper right
-        translate([(aWidth/2)-cornerStudOffsetX,(aDepth/2)-cornerStudOffsetY,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
+        translate([(aWidth/2)-cornerStudOffsetX,(aDepth/2)-cornerStudOffsetY-cornerStudOffsetYExtra,beamHeight]) cylinder(h=boardOffsetZ, r=cornerStudRadius);
         
         // Floor
         translate([0,0,(floorHeight/2)]) resize([0,0,floorHeight], [false,false,false]) innerShape();
