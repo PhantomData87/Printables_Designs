@@ -100,10 +100,10 @@ module plateHoledUp() {
     
         // IO Cuts (Magic numbers beware!)
             // Ethernet port
-        translate([-(aWidth/2)+24.875-(tolerance/2),-(aDepth/2)-perimeterThickness,rimHeight-2-(tolerance/2)]) resize([16.5+tolerance,perimeterThickness,10]) cube();
+        translate([-(aWidth/2)+24.875-(tolerance/2),-(aDepth/2)-perimeterThickness,rimHeight-2-(tolerance/2)-0.2]) resize([16.5+tolerance,perimeterThickness,10]) cube();
             // Generic USB ports
-        translate([-(aWidth/2)+10.325-(tolerance/2)+6,(aDepth/2),rimHeight-1.75-(tolerance/2)]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
-        translate([-(aWidth/2)+28.425-(tolerance/2)+6,(aDepth/2),rimHeight-1.75-(tolerance/2)]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
+        translate([-(aWidth/2)+10.325-(tolerance/2)+6,(aDepth/2),rimHeight-1.75-(tolerance/2)-0.2]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
+        translate([-(aWidth/2)+28.425-(tolerance/2)+6,(aDepth/2),rimHeight-1.75-(tolerance/2)-0.2]) resize([13.6+tolerance,perimeterThickness,5.5]) cube();
             // HDMI port
         translate([-(aWidth/2)+7.775-(tolerance/2),-(aDepth/2)-perimeterThickness,rimHeight-1.5-(tolerance/2)]) resize([15.3+tolerance,perimeterThickness,2]) cube();
         
