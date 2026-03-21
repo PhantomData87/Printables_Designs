@@ -3,6 +3,7 @@ Any custom designs I post (or planning to post) onto printables.com are saved he
 
 ### La Frite Case (No Screws!) 
 [Printables.com](https://www.printables.com/model/1644518-la-frite-case-libre-computers-aml-s805x-ac-no-scre)
+![La Frite case parts with actual La Frite board inserted](img/la_frite.jpg)
 
 A less than 20 gram PETG plastic case for "La Frite" [AML-S805X-AC](https://libre.computer/products/aml-s805x-ac/)! Simply insert "La Frite" into the bottom case, smoothly insert the top case through the plastic guides, and finally snap on two plastic hooks to secure down the plastic case.
 
