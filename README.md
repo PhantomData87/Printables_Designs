@@ -1,3 +1,6 @@
+> [!warning]
+> Project has been frozen and moved towards codeberg: https://codeberg.org/PhantomDocuments/Custom-3D-Printable-Designs
+
 # Printables_Designs
 Any custom designs I post (or planning to post) onto printables.com are saved here. None of these designs are sponsored, but are instead used by me.
 
